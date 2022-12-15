@@ -13,6 +13,13 @@ class App extends React.Component {
         artist: '',
         album: '',
         id: 0
+      }], 
+      playlistName: '',
+      playlistTracks: [{
+        name: '',
+        artist: '',
+        album: '',
+        id: 0,
       }]
     }
   }
