@@ -36,7 +36,7 @@ const Spotify = {
             window.location = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirect_uri}`;
         }
     },
-    
+
     search(term) {
         const retrievedAccessToken = Spotify.getAccessToken();
         return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
@@ -59,6 +59,50 @@ const Spotify = {
                     };
                 });
             });
+    },
+
+    savePlaylist(playlistName, trackUris) {
+        if (!playlistName || !trackUris.length) {
+            return;
+        }
+
+        const accessToken = Spotify.getAccessToken();
+        const headers = {
+            Authorization: `Bearer ${accessToken}`
+        };
+        const userID = '';
+        
+        // GET current user's Profile, for User's ID
+        return fetch(`https://api.spotify.com/v1/me`, { headers: headers })
+            .then(response => response.json())
+            .then(jsonResponse => {
+                userID = jsonResponse.id;
+                // POST Create Playlist, with the input name to the current user’s Spotify account. Receive the playlist ID back from the request
+                return fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
+                    headers: headers,
+                    method: 'POST',
+                    body: JSON.stringify({
+                        name: playlistName
+                    })
+                })
+                    .then(response => response.json())
+                    .then(jsonResponse => {
+                        const playlistID = jsonResponse.id;
+                        // POST Add Items to Playlist, referencing the current user’s account (ID) and the new playlist (ID)
+                        return fetch(`https://api.spotify.com//v1/users/${userID}/playlists/${playlistID}/tracks`, {
+                            headers: headers,
+                            method: 'POST',
+                            body: JSON.stringify({
+                                uris: trackUris
+                            })
+                        })
+                    }
+                );
+            }
+        );
+
+
+        
     }
 };
 
