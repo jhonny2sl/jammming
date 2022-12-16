@@ -19,7 +19,7 @@ const Spotify = {
         console.log(matchedAccessToken);
         console.log(matchedExpiresIn);
 
-        if (matchedAccessToken && matchedExpiresIn) { 
+        if (matchedAccessToken && matchedExpiresIn) {
             // Set the access token value
             accessToken = matchedAccessToken[1];
             // Set a variable for expiration time
@@ -29,6 +29,9 @@ const Spotify = {
             // Clear the parameters from the URL, so the app doesn’t try grabbing the access token after it has expired
             window.history.pushState('Access Token', null, '/');
             return accessToken;
+        } else /* if (!matchedAccessToken && !matchedExpiresIn) */ {
+            // Redirect users to the application using web browser
+            window.location = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirect_uri}`;
         }
     }
 };
