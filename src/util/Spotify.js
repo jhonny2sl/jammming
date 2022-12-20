@@ -1,4 +1,4 @@
-const accessToken = '';
+let accessToken;
 const client_id = '94653a7e35674665a40bd7f708696bc2';
 const redirect_uri = 'http://localhost:3000/';
 
@@ -68,7 +68,7 @@ const Spotify = {
         const headers = {
             Authorization: `Bearer ${retrievedAccessToken}`
         };
-        const userID = '';
+        let userID;
         
         // GET current user's Profile, for User's ID
         return fetch(`https://api.spotify.com/v1/me`, { headers: headers })
