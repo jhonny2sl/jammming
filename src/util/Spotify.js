@@ -1,5 +1,3 @@
-import SearchBar from "../Components/SearchBar/SearchBar";
-
 const accessToken = '';
 const client_id = '94653a7e35674665a40bd7f708696bc2';
 const redirect_uri = 'http://localhost:3000/';
@@ -25,7 +23,7 @@ const Spotify = {
             // Set the access token value
             accessToken = matchedAccessToken[1];
             // Set a variable for expiration time
-            const expiresIn = matchedExpiresIn[1];
+            const expiresIn = Number(matchedExpiresIn[1]);
             // Set the access token to expire at the value for expiration time
             window.setTimeout(() => accessToken = '', expiresIn * 1000);
             // Clear the parameters from the URL, so the app doesn’t try grabbing the access token after it has expired
@@ -66,9 +64,9 @@ const Spotify = {
             return;
         }
 
-        const accessToken = Spotify.getAccessToken();
+        const retrievedAccessToken = Spotify.getAccessToken();
         const headers = {
-            Authorization: `Bearer ${accessToken}`
+            Authorization: `Bearer ${retrievedAccessToken}`
         };
         const userID = '';
         
