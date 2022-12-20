@@ -20,7 +20,7 @@ class App extends React.Component {
         name: '',
         artist: '',
         album: '',
-        id: '',
+        id: ''
       }]
     }
     this.addTrack = this.addTrack.bind(this);
@@ -34,12 +34,11 @@ class App extends React.Component {
     const playlistTracks = this.state.playlistTracks;
     if (playlistTracks.find(savedTrack => savedTrack === track.id)) {
       return;
-    } else {
-      playlistTracks.push(track);
-      this.setState({
-        playlistTracks: playlistTracks
-      });
     }
+    playlistTracks.push(track);
+    this.setState({
+      playlistTracks: playlistTracks
+    });
   }
 
   removeTrack(track) {
