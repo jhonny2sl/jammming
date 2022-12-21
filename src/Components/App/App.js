@@ -9,21 +9,21 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchResults: [{
+      searchResults: [/* {
         name: 'name',
         artist: 'artist',
         album: 'album',
         id: '0',
         // uri: '' // track's reference from Spotify API
-      }], 
+      } */], 
       playlistName: '',
-      playlistTracks: [{
+      playlistTracks: [/* {
         name: 'playlistname',
         artist: 'playlistartist',
         album: 'playlistalbum',
         id: '1',
         // uri: '' // track's reference from Spotify API
-      }]
+      } */]
     }
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
