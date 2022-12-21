@@ -15,10 +15,10 @@ const Spotify = {
         */
         const matchedAccessToken = window.location.href.match(/access_token=([^&]*)/);
         const matchedExpiresIn = window.location.href.match(/expires_in=([^&]*)/);
-
+/* 
         console.log(matchedAccessToken);
         console.log(matchedExpiresIn);
-
+ */
         if (matchedAccessToken && matchedExpiresIn) {
             // Set the access token value
             accessToken = matchedAccessToken[1];
@@ -87,13 +87,13 @@ const Spotify = {
                     .then(jsonResponse => {
                         const playlistID = jsonResponse.id;
                         // POST Add Items to Playlist, referencing the current user’s account (ID) and the new playlist (ID)
-                        return fetch(`https://api.spotify.com//v1/users/${userID}/playlists/${playlistID}/tracks`, {
+                        return fetch(`https://api.spotify.com/v1/users/${userID}/playlists/${playlistID}/tracks`, {
                             headers: headers,
                             method: 'POST',
                             body: JSON.stringify({
                                 uris: trackUris
                             })
-                        })
+                        });
                     }
                 );
             }
