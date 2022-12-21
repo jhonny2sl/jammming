@@ -33,7 +33,7 @@ class App extends React.Component {
   }
 
   addTrack(track) {
-    const playlistTracks = this.state.playlistTracks;
+    let playlistTracks = this.state.playlistTracks;
     if (playlistTracks.find(savedTrack => savedTrack === track.id)) {
       return;
     }
@@ -44,8 +44,8 @@ class App extends React.Component {
   }
 
   removeTrack(track) {
-    const playlistTracks = this.state.playlistTracks;
-    playlistTracks.filter(currentTrack => currentTrack.id !== track.id);
+    let playlistTracks = this.state.playlistTracks;
+    playlistTracks = playlistTracks.filter(currentTrack => currentTrack.id !== track.id);
     this.setState({
       playlistTracks: playlistTracks
     });
